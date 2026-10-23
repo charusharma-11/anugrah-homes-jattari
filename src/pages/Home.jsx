@@ -164,7 +164,8 @@ function Home() {
   return (
     <main className="anugrah-home w-full overflow-hidden bg-[#F7F8F5] text-[#17473F]">
       <style>{`
-              .anugrah-home .circle-mark {
+         
+        .anugrah-home .circle-mark {
           animation: ah-rotate 24s linear infinite;
         }
 
@@ -180,34 +181,13 @@ function Home() {
           animation-play-state: running;
         }
 
-        .anugrah-home .gallery-strip {
-          display: flex;
-          width: max-content;
-          white-space: nowrap;
-          animation: ah-text-marquee 28s linear infinite;
-          will-change: transform;
-        }
-
-        .anugrah-home .gallery-strip-reverse {
-          animation-direction: reverse;
-        }
-
-        .anugrah-home .gallery-frame {
-          box-sizing: border-box;
-          padding: 8px;
-          background: #FFFFFF;
-          border: 1px solid rgba(15, 82, 87, 0.18);
-          box-shadow: 0 5px 18px rgba(23, 71, 63, 0.12);
-        }
-
-        .anugrah-home .gallery-frame img {
-          display: block;
-          border-radius: 6px;
-          object-fit: cover;
-        }
-
+        /* MOVING TEXT STRIPS */
         .anugrah-home .gallery-text-track {
+          display: block;
+          position: relative;
+          width: 100%;
           overflow: hidden;
+          white-space: nowrap;
           border-top: 1px solid rgba(15, 82, 87, 0.35);
           border-bottom: 1px solid rgba(15, 82, 87, 0.35);
           background: #F7F8F5;
@@ -215,23 +195,56 @@ function Home() {
           padding: 10px 0;
         }
 
+        .anugrah-home .gallery-strip {
+          display: flex;
+          flex-wrap: nowrap;
+          width: max-content;
+          max-width: none;
+          white-space: nowrap;
+          animation: ah-text-marquee 35s linear infinite;
+          will-change: transform;
+        }
+
+        .anugrah-home .gallery-strip > div {
+          display: flex;
+          flex: 0 0 auto;
+          flex-wrap: nowrap;
+          align-items: center;
+          width: max-content;
+          max-width: none;
+          white-space: nowrap;
+        }
+
         .anugrah-home .gallery-strip span {
           display: inline-block;
-          padding: 0 18px;
+          flex: 0 0 auto;
+          width: auto;
+          max-width: none;
+          white-space: nowrap;
+          word-break: normal;
+          overflow-wrap: normal;
+          padding: 0 16px;
           font-size: 10px;
+          line-height: 1.8;
           font-weight: 600;
-          letter-spacing: 0.18em;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
         }
 
-        @keyframes ah-text-marquee {
-          from {
-            transform: translateX(0);
-          }
-          to {
-            transform: translateX(-50%);
+        .anugrah-home .gallery-strip-reverse {
+          animation-direction: reverse;
+        }
+
+        @media (max-width: 430px) {
+          .anugrah-home .gallery-strip span {
+            padding-left: 12px;
+            padding-right: 12px;
+            font-size: 9px;
+            letter-spacing: 0.04em;
+            line-height: 1.8;
           }
         }
+
 
         @keyframes ah-drift {
           from {
