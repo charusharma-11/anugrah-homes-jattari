@@ -67,7 +67,7 @@ const heroImages = [gallery6, gallery2, gallery3, gallery8];
 function Eyebrow({ children, light = false }) {
   return (
     <p
-      className={`mb-4 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.2em] sm:text-xs ${
+      className={`mb-4 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.5em] sm:text-xs ${
         light ? "text-white/65" : "text-[#0F5257]"
       }`}
     >
@@ -164,76 +164,106 @@ function Home() {
   return (
     <main className="anugrah-home w-full overflow-hidden bg-[#F7F8F5] text-[#17473F]">
       <style>{`
-        .anugrah-home {
-          --ah-green: #0F5257;
-          --ah-ink: #17473F;
-          --ah-paper: #F7F8F5;
-        }
-
-        .anugrah-home ::selection {
-          background: #C8E2D8;
-          color: #17473F;
-        }
-
-        .anugrah-home .hero-photo {
-          animation: ah-drift 16s ease-in-out infinite alternate;
-        }
-
-        .anugrah-home .float-photo {
-          animation: ah-float 7s ease-in-out infinite;
-        }
-
-        .anugrah-home .float-photo.delay {
-          animation-delay: -3s;
-        }
-
-        .anugrah-home .image-frame img {
-          transition: transform .7s cubic-bezier(.2,.7,.2,1);
-        }
-
-        .anugrah-home .image-frame:hover img {
-          transform: scale(1.045);
-        }
-
-        .anugrah-home .soft-card {
-          transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
-        }
-
-        .anugrah-home .soft-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 20px 50px rgba(20,32,30,.09);
-          border-color: rgba(15,82,87,.32);
-        }
-
-        .anugrah-home .circle-mark {
+              .anugrah-home .circle-mark {
           animation: ah-rotate 24s linear infinite;
         }
 
+        /* MOVING IMAGE GALLERY */
         .anugrah-home .gallery-track {
+          display: flex;
           width: max-content;
-          animation: ah-marquee 38s linear infinite;
+          animation: ah-marquee 30s linear infinite;
+          will-change: transform;
         }
 
         .anugrah-home .gallery-track:hover {
-          animation-play-state: paused;
+          animation-play-state: running;
+        }
+
+        .anugrah-home .gallery-strip {
+          display: flex;
+          width: max-content;
+          white-space: nowrap;
+          animation: ah-text-marquee 28s linear infinite;
+          will-change: transform;
+        }
+
+        .anugrah-home .gallery-strip-reverse {
+          animation-direction: reverse;
+        }
+
+        .anugrah-home .gallery-frame {
+          box-sizing: border-box;
+          padding: 8px;
+          background: #FFFFFF;
+          border: 1px solid rgba(15, 82, 87, 0.18);
+          box-shadow: 0 5px 18px rgba(23, 71, 63, 0.12);
+        }
+
+        .anugrah-home .gallery-frame img {
+          display: block;
+          border-radius: 6px;
+          object-fit: cover;
+        }
+
+        .anugrah-home .gallery-text-track {
+          overflow: hidden;
+          border-top: 1px solid rgba(15, 82, 87, 0.35);
+          border-bottom: 1px solid rgba(15, 82, 87, 0.35);
+          background: #F7F8F5;
+          color: #0F5257;
+          padding: 10px 0;
+        }
+
+        .anugrah-home .gallery-strip span {
+          display: inline-block;
+          padding: 0 18px;
+          font-size: 10px;
+          font-weight: 600;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+        }
+
+        @keyframes ah-text-marquee {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
         }
 
         @keyframes ah-drift {
-          from { transform: scale(1.02); }
-          to { transform: scale(1.09); }
+          from {
+            transform: scale(1.02);
+          }
+          to {
+            transform: scale(1.09);
+          }
         }
 
         @keyframes ah-float {
-          0%,100% { transform: translateY(0); }
-          50% { transform: translateY(-10px); }
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-10px);
+          }
         }
 
         @keyframes ah-rotate {
-          to { transform: rotate(360deg); }
+          to {
+            transform: rotate(360deg);
+          }
         }
 
         @keyframes ah-marquee {
-          to { transform: translateX(-50%); }
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -717,25 +747,66 @@ function Home() {
         </div>
       </section>
 
+     
       {/* MOVING GALLERY */}
       <section className="overflow-hidden bg-[#F7F8F5] py-4 sm:py-5">
-        <div className="gallery-track flex gap-3 sm:gap-4">
+
+        {/* TOP MOVING TEXT STRIP */}
+        <div className="gallery-text-track mb-3">
+          <div className="gallery-strip flex w-max">
+            {[1, 2].map((item) => (
+              <div key={item} className="flex shrink-0 items-center">
+                <span>Jattari Living</span>
+                <span>✦</span>
+                <span>Prime Location</span>
+                <span>✦</span>
+                <span>Anugrah Homes</span>
+                <span>✦</span>
+                <span>Your Dream Home</span>
+                <span>✦</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* MOVING IMAGE GALLERY */}
+        <div className="gallery-track flex gap-3 py-2 sm:gap-4">
           {[...movingGallery, ...movingGallery].map((image, index) => (
             <div
               key={`${image}-${index}`}
               data-image-card
-              className="image-frame image-hover w-[240px] shrink-0 overflow-hidden rounded-xl sm:w-[300px] sm:rounded-2xl lg:w-[360px]"
+              className="gallery-frame image-frame image-hover w-[240px] shrink-0 overflow-hidden rounded-xl transition-all duration-300 hover:shadow-[0_10px_24px_rgba(23,71,63,0.20)] sm:w-[300px] sm:rounded-2xl lg:w-[360px]"
             >
               <img
                 src={image}
                 alt={`Jattari gallery ${index + 1}`}
                 loading="lazy"
-                className="h-44 w-full object-cover sm:h-60 lg:h-72"
+                className="h-44 w-full sm:h-60 lg:h-72"
               />
             </div>
           ))}
         </div>
+
+        {/* BOTTOM MOVING TEXT STRIP */}
+        <div className="gallery-text-track mt-3">
+          <div className="gallery-strip gallery-strip-reverse flex w-max">
+            {[1, 2].map((item) => (
+              <div key={item} className="flex shrink-0 items-center">
+                <span>Space to Grow</span>
+                <span>✦</span>
+                <span>Comfort & Elegance</span>
+                <span>✦</span>
+                <span>Jattari · Aligarh</span>
+                <span>✦</span>
+                <span>A Place to Belong</span>
+                <span>✦</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </section>
+
 
       {/* FINAL CTA */}
       <section className="bg-gradient-to-br from-[#0F5257] via-[#287A6D] to-[#0B3D3E] px-5 py-16 text-white sm:px-8 sm:py-24 lg:px-12 lg:py-28">
