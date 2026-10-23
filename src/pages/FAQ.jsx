@@ -523,8 +523,7 @@ function FAQ() {
   return (
     <main className="faq-page w-full overflow-hidden bg-[#F7F8F5] text-[#0B3D3E]">
       {/* HERO */}
-      <section className="faq-hero relative isolate overflow-hidden bg-[#0B3D3E] px-5 pb-16 pt-32 text-white sm:px-8 sm:pb-20 sm:pt-36 lg:px-12 lg:pb-24 lg:pt-40">
-        <div className="faq-grid pointer-events-none absolute inset-0 -z-10 opacity-40" />
+<section className="faq-hero relative isolate overflow-hidden bg-[#0B3D3E] px-5 pb-16 pt-20 text-white sm:px-8 sm:pb-20 sm:pt-24 lg:px-12 lg:pb-24 lg:pt-28">        <div className="faq-grid pointer-events-none absolute inset-0 -z-10 opacity-40" />
 
         <div className="faq-orb faq-orb-one pointer-events-none absolute -right-20 -top-28 -z-10 h-72 w-72 rounded-full bg-[#287A6D]/40 blur-3xl sm:h-[480px] sm:w-[480px]" />
 
@@ -534,7 +533,7 @@ function FAQ() {
           <ScrollReveal direction="up" duration={900}>
             <div className="mb-7 flex items-center gap-3 text-[10px] uppercase tracking-[0.25em] text-[#B9D8C8] sm:text-xs">
               <span className="h-px w-10 bg-[#B9D8C8]" />
-              Jattari / Frequently Asked Questions
+             
             </div>
           </ScrollReveal>
 

@@ -13,6 +13,7 @@ import Location from "./pages/Location";
 import Gallery from "./pages/Gallery";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
+import EnquiryPopup from "./components/EnquiryPopup";
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -35,6 +36,7 @@ function App() {
       <ScrollToTop />
 
       <ImageLightbox>
+        <EnquiryPopup />
 
         <Navbar />
 

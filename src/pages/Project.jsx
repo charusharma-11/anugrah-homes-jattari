@@ -3,7 +3,6 @@ import {
   ArrowDownRight,
   ArrowRight,
   ArrowUpRight,
-  Check,
   CheckCircle2,
   Compass,
   MapPin,
@@ -11,7 +10,6 @@ import {
   Moon,
   Sun,
   Waves,
-  X,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -205,7 +203,11 @@ function Project() {
 
   const handleViewportMove = (event) => {
     const node = viewportRef.current;
-    if (!node || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+
+    if (
+      !node ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
       return;
     }
 
@@ -306,6 +308,23 @@ function Project() {
           }
         }
 
+        @keyframes locationHeadingReveal {
+          from {
+            opacity: 0;
+            transform: translateY(28px);
+            filter: blur(5px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+            filter: blur(0);
+          }
+        }
+
+        .location-heading-reveal {
+          animation: locationHeadingReveal 900ms cubic-bezier(.2,.7,.2,1) both;
+        }
+
         .project-pulse {
           animation: projectSoftPulse 1.8s ease-out infinite;
         }
@@ -376,7 +395,8 @@ function Project() {
           .project-pulse,
           .project-radar,
           .project-plan-flip,
-          .project-map-pin {
+          .project-map-pin,
+          .location-heading-reveal {
             animation: none !important;
           }
 
@@ -386,9 +406,7 @@ function Project() {
         }
       `}</style>
 
-      {/* =========================================================
-          01. SCREEN-SPLIT HERO — ENTRY ZONE
-      ========================================================= */}
+      {/* 01. SCREEN-SPLIT HERO */}
       <section className="relative bg-[#0B3D3E] text-white">
         <div className="pointer-events-none absolute inset-0">
           <div className="absolute -right-32 -top-32 h-[420px] w-[420px] rounded-full border border-[#B9D8C8]/10 sm:h-[600px] sm:w-[600px]" />
@@ -396,12 +414,9 @@ function Project() {
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_15%_15%,rgba(40,122,109,0.25),transparent_40%)]" />
         </div>
 
-        <div className="relative mx-auto grid min-h-[auto] max-w-[1600px] grid-cols-1 lg:min-h-[820px] lg:grid-cols-2">
-          {/* LEFT: sticky story */}
+        <div className="relative mx-auto grid min-h-[auto] max-w-[1600px] grid-cols-1 lg:min-h-[720px] lg:grid-cols-2">
           <div className="relative z-10 flex items-center px-5 pb-10 pt-28 sm:px-8 sm:pb-14 sm:pt-32 lg:sticky lg:top-0 lg:h-screen lg:min-h-[720px] lg:px-12 lg:py-20 xl:px-20">
             <div className="w-full max-w-2xl">
-            
-
               <div className="mt-8 overflow-hidden" ref={heroTitleRef}>
                 <h1 className="font-serif text-[clamp(3.4rem,8.5vw,7.6rem)] font-medium leading-[0.88] tracking-[-0.065em]">
                   <span className="block overflow-hidden pb-2">
@@ -450,8 +465,7 @@ function Project() {
             </div>
           </div>
 
-          {/* RIGHT: cinematic parallax viewport */}
-          <div className="relative min-h-[440px] overflow-hidden px-4 pb-6 sm:min-h-[560px] sm:px-8 sm:pb-10 lg:min-h-[820px] lg:px-5 lg:py-5 xl:px-8 xl:py-8">
+          <div className="relative min-h-[400px] overflow-hidden px-4 pb-6 sm:min-h-[480px] sm:px-8 sm:pb-8 lg:min-h-[720px] lg:px-5 lg:py-5 xl:px-8 xl:py-8">
             <div
               ref={viewportRef}
               onMouseMove={handleViewportMove}
@@ -513,19 +527,19 @@ function Project() {
         </div>
       </section>
 
-      {/* =========================================================
-          INTRODUCTION — SPATIAL STORYTELLING
-      ========================================================= */}
-      <section className="relative overflow-hidden px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
+      {/* INTRODUCTION — SPATIAL STORYTELLING */}
+      <section className="relative overflow-hidden px-5 py-14 sm:px-8 sm:py-20 lg:px-12 lg:py-24">
         <div className="pointer-events-none absolute -right-20 top-10 h-64 w-64 rounded-full border border-[#0F5257]/10" />
 
-        <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:gap-20">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.45fr_1.55fr] lg:gap-12">
           <div>
             <Eyebrow>The idea behind the place</Eyebrow>
-            <SectionNumber>02 / THE NARRATIVE</SectionNumber>
+            <div className="mt-3">
+              <SectionNumber>02 / THE NARRATIVE</SectionNumber>
+            </div>
           </div>
 
-          <div>
+          <div className="min-w-0 w-full">
             <h2 className="font-serif text-3xl leading-[1.08] tracking-[-0.045em] sm:text-5xl lg:text-6xl">
               More than a location.
               <span className="block text-[#287A6D]">
@@ -562,21 +576,21 @@ function Project() {
         </div>
       </section>
 
-      {/* =========================================================
-          02. CINEMATIC BENTO SHOWCASE — KEY HIGHLIGHTS
-      ========================================================= */}
+      {/* 02. CINEMATIC BENTO SHOWCASE — KEY HIGHLIGHTS */}
       <section
         id="key-highlights"
-        className="bg-[#0B3D3E] px-5 py-20 text-white sm:px-8 sm:py-28 lg:px-12 lg:py-32"
+        className="bg-[#0B3D3E] px-5 py-14 text-white sm:px-8 sm:py-20 lg:px-12 lg:py-24"
       >
         <div className="mx-auto max-w-7xl">
-          <div className="mb-10 flex flex-col gap-5 sm:mb-14 lg:flex-row lg:items-end lg:justify-between">
+          <div className="mb-7 flex flex-col gap-4 sm:mb-10 lg:flex-row lg:items-end lg:justify-between">
             <SectionHeading
               eyebrow="Key highlights"
               title={
                 <>
                   Details worth
-                  <span className="block text-[#B9D8C8]">looking closer at.</span>
+                  <span className="block text-[#B9D8C8]">
+                    looking closer at.
+                  </span>
                 </>
               }
               description="Explore the project through its progress information, material-inspired imagery and changing ambient light."
@@ -748,41 +762,84 @@ function Project() {
                 </div>
               </div>
             </article>
+
+            {/* CARD 4 — RIGHT-SIDE PROJECT STORY */}
+            <article className="group relative flex min-h-[420px] flex-col justify-between overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#0F5257] p-6 sm:min-h-[510px] sm:rounded-[2rem] sm:p-9">
+              <div className="pointer-events-none absolute -right-16 -top-16 h-64 w-64 rounded-full border border-[#B9D8C8]/10 transition-transform duration-700 group-hover:scale-110" />
+
+              <div className="relative">
+                <SectionNumber light>04 / THE PROJECT STORY</SectionNumber>
+
+                <div className="mt-8 flex h-12 w-12 items-center justify-center rounded-full border border-[#B9D8C8]/25 bg-[#B9D8C8]/10 text-[#B9D8C8]">
+                  <Compass size={22} />
+                </div>
+
+                <h3 className="mt-7 max-w-md font-serif text-3xl leading-[1.08] tracking-[-0.04em] sm:text-4xl">
+                  Designed around
+                  <span className="block text-[#B9D8C8]">
+                    the way you live.
+                  </span>
+                </h3>
+
+                <p className="mt-5 max-w-md text-sm leading-7 text-white/60">
+                  Discover the vision behind Anugrah Homes Jattari, explore
+                  the project experience and learn more about the details that
+                  could shape your next chapter.
+                </p>
+              </div>
+
+              <div className="relative mt-8 border-t border-white/15 pt-6">
+                <span className="mb-5 block text-[10px] uppercase tracking-[0.17em] text-white/45">
+                  Your future starts here
+                </span>
+
+                <Link
+                  to="/contact"
+                  className="inline-flex min-h-12 w-full items-center justify-between gap-4 rounded-full bg-[#B9D8C8] px-5 py-4 text-xs font-semibold uppercase tracking-[0.1em] text-[#0B3D3E] transition-all duration-300 hover:bg-white sm:w-auto sm:min-w-[230px]"
+                >
+                  Talk to our team
+                  <ArrowUpRight size={17} />
+                </Link>
+              </div>
+            </article>
           </div>
         </div>
       </section>
 
-
-      {/* =========================================================
-          04. MICRO-LOCATION INTELLIGENCE — INTERACTIVE MAP
-      ========================================================= */}
+      {/* 04. MICRO-LOCATION INTELLIGENCE — INTERACTIVE MAP */}
       <section
         id="location"
-        className="relative overflow-hidden bg-[white] px-5 py-20 text-white sm:px-8 sm:py-28 lg:px-12 lg:py-32"
+        className="relative overflow-hidden bg-[#F7F8F5] px-5 py-12 text-[#0B3D3E] sm:px-8 sm:py-16 lg:px-12 lg:py-20"
       >
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-end">
-            <SectionHeading
-              eyebrow="Micro-location intelligence"
-              title={
-                <>
-                  A closer look at
-                  <span className="block text-[#B9D8C8]">your surroundings.</span>
-                </>
-              }
-              description="Explore the location themes and contact our team for confirmed routes, nearby destinations and site directions."
-              light
-            />
+          {/* CENTERED LOCATION HEADING */}
+          <div className="mx-auto flex max-w-5xl flex-col items-center text-center">
+            <div className="location-heading-reveal flex w-full flex-col items-center">
+              <Eyebrow>Micro-location intelligence</Eyebrow>
 
-            <div className="flex items-center gap-3 text-xs leading-6 text-white/50 lg:ml-auto">
-              <MapPin size={18} className="shrink-0 text-[#B9D8C8]" />
-              <span>Jattari · Aligarh region · Uttar Pradesh</span>
+              <h2 className="mt-5 font-serif text-4xl font-medium leading-[1.02] tracking-[-0.045em] text-[#0B3D3E] sm:text-5xl lg:text-6xl">
+                A closer look at
+                <span className="block text-[#287A6D]">
+                  your surroundings.
+                </span>
+              </h2>
+
+              <p className="mt-5 max-w-2xl text-sm leading-7 text-[#0B3D3E]/70 sm:text-base sm:leading-8">
+                Explore the location themes and contact our team for confirmed
+                routes, nearby destinations and site directions.
+              </p>
+
+              <div className="mt-5 flex items-center justify-center gap-3 text-xs leading-6 text-[#0B3D3E]/65">
+                <MapPin size={18} className="shrink-0 text-[#287A6D]" />
+                <span>Jattari · Aligarh region · Uttar Pradesh</span>
+              </div>
             </div>
           </div>
 
-          <div className="mt-10 grid gap-5 lg:mt-14 lg:grid-cols-[1.3fr_0.7fr]">
-            {/* Stylised interactive map */}
-            <div className="relative min-h-[410px] overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#102F31] sm:min-h-[520px] sm:rounded-[2rem]">
+          {/* MAP AND DETAIL CARD */}
+          <div className="mt-10 grid items-stretch gap-6 lg:mt-12 lg:grid-cols-[1.25fr_0.75fr] lg:gap-7">
+            {/* STYLISED INTERACTIVE MAP */}
+            <div className="relative min-h-[480px] overflow-hidden rounded-[1.5rem] border border-[#0F5257]/15 bg-[#102F31] sm:min-h-[580px] lg:min-h-[640px] sm:rounded-[2rem]">
               <div
                 className="absolute inset-0 opacity-35"
                 style={{
@@ -884,11 +941,11 @@ function Project() {
               </div>
             </div>
 
-            {/* Sticky detail card */}
-            <div className="lg:sticky lg:top-8 lg:self-start">
+            {/* RIGHT-SIDE LOCATION DETAIL CARD */}
+            <div className="lg:sticky lg:top-8 lg:self-stretch">
               <div
                 key={selectedLocation.id}
-                className="project-plan-flip rounded-[1.5rem] border border-white/10 bg-[#0F5257] p-6 sm:rounded-[2rem] sm:p-8"
+                className="project-plan-flip flex min-h-[480px] flex-col justify-center rounded-[1.5rem] border border-white/10 bg-[#0F5257] p-7 sm:min-h-[580px] sm:rounded-[2rem] sm:p-9 lg:min-h-[640px] lg:p-10"
               >
                 <div className="flex items-center justify-between gap-4">
                   <SectionNumber light>
@@ -928,7 +985,7 @@ function Project() {
                 </div>
               </div>
 
-              <p className="mt-4 text-[10px] leading-5 text-white/35">
+              <p className="mt-4 text-[10px] leading-5 text-[#0B3D3E]/55">
                 This graphic is illustrative and is not a navigable or
                 geographically accurate map. Confirm all location details
                 before publishing.
@@ -938,10 +995,8 @@ function Project() {
         </div>
       </section>
 
-      {/* =========================================================
-          PROJECT IMAGE STORY
-      ========================================================= */}
-      <section className="px-5 py-20 sm:px-8 sm:py-28 lg:px-12 lg:py-36">
+      {/* PROJECT IMAGE STORY */}
+      <section className="px-5 py-12 sm:px-8 sm:py-16 lg:px-12 lg:py-20">
         <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-2">
           <div className="group relative min-h-[360px] overflow-hidden rounded-[1.5rem] bg-[#0B3D3E] sm:min-h-[540px] sm:rounded-[2rem]">
             <img
@@ -992,10 +1047,8 @@ function Project() {
         </div>
       </section>
 
-      {/* =========================================================
-          05. TRUST METRICS & ACTION FOOTER
-      ========================================================= */}
-      <section className="relative overflow-hidden bg-[#0F5257] px-5 py-20 text-white sm:px-8 sm:py-28 lg:px-12 lg:py-32">
+      {/* 05. TRUST METRICS & ACTION FOOTER */}
+      <section className="relative overflow-hidden bg-[#0F5257] px-5 py-14 text-white sm:px-8 sm:py-20 lg:px-12 lg:py-24">
         <div className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-full border border-white/10 sm:h-[420px] sm:w-[420px]" />
         <div className="pointer-events-none absolute -bottom-28 -left-20 h-80 w-80 rounded-full border border-white/10" />
 
@@ -1042,7 +1095,7 @@ function Project() {
             </div>
           </div>
 
-          {/* Lead capture form */}
+          {/* LEAD CAPTURE FORM */}
           <div className="rounded-[1.5rem] border border-white/10 bg-[#0B3D3E]/70 p-5 backdrop-blur-xl sm:rounded-[2rem] sm:p-8 lg:p-10">
             {submitted ? (
               <div className="flex min-h-[390px] flex-col items-start justify-center">
@@ -1177,9 +1230,7 @@ function Project() {
         </div>
       </section>
 
-      {/* =========================================================
-          FINAL FOOTER STRIP
-      ========================================================= */}
+      {/* FINAL FOOTER STRIP */}
       <footer className="bg-[#0B3D3E] px-5 py-6 text-white sm:px-8 lg:px-12">
         <div className="mx-auto flex max-w-7xl flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <Link

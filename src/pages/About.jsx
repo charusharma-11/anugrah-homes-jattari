@@ -447,11 +447,9 @@ function About() {
             <div className="relative flex min-w-0 flex-col justify-center overflow-hidden rounded-[1.25rem] border border-white/10 bg-white/[0.035] px-5 py-7 sm:rounded-[1.75rem] sm:px-8 sm:py-9 lg:min-h-[590px] lg:px-8 lg:py-8 xl:min-h-[620px] xl:px-10">
               <div className="floating-orbit pointer-events-none absolute right-8 top-20 hidden h-32 w-32 rounded-full border border-dashed border-[#B9D8C8]/20 lg:block" />
 
-<div className="hero-copy relative z-10 w-full min-w-0 visible">                <Eyebrow light>About Anugrah Homes</Eyebrow>
+<div className="hero-copy relative z-10 w-full min-w-0 visible">              
 
-                <p className="mb-3 break-words text-[10px] uppercase tracking-[0.13em] text-white/60 sm:text-xs">
-                  Jattari · Aligarh · Uttar Pradesh
-                </p>
+                
 
                 <h1 className="w-full max-w-full break-words [overflow-wrap:anywhere] font-serif text-[clamp(2rem,3.1vw,3.5rem)] font-medium leading-[1.12] tracking-[-0.035em]">
                   Architecting Dreams,{" "}

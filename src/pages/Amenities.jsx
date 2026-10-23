@@ -273,7 +273,7 @@ function Amenities() {
       `}</style>
 
       {/* HERO */}
-      <section className="amenity-hero relative isolate flex min-h-[600px] items-end overflow-hidden bg-[#0B3D3E] sm:min-h-[690px] lg:min-h-[760px]">
+      <section className="amenity-hero relative isolate flex min-h-[600px] items-center overflow-hidden bg-[#0B3D3E] sm:min-h-[690px] lg:min-h-[760px]">
         <div
           className="amenity-hero-image absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${gallery7})` }}
@@ -284,13 +284,12 @@ function Amenities() {
 
         <div className="absolute -right-24 top-1/4 h-72 w-72 rounded-full bg-[#B9D8C8]/15 blur-[100px]" />
 
-        <div className="relative z-10 mx-auto w-full max-w-[1440px] px-5 pb-16 pt-32 sm:px-8 sm:pb-20 lg:px-14 lg:pb-24">
-          <div className="max-w-5xl">
+<div className="relative z-10 mx-auto w-full max-w-[1440px] px-5 pb-8 pt-4 sm:px-8 sm:pb-12 sm:pt-8 lg:px-14 lg:pb-16 lg:pt-10">          <div className="max-w-5xl">
             <ScrollReveal direction="up" duration={1000}>
               <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-white/20 bg-black/20 px-4 py-2.5 backdrop-blur-xl">
                 <span className="h-2 w-2 rounded-full bg-[#B9D8C8] shadow-[0_0_14px_rgba(185,216,200,.8)]" />
                 <span className="text-[10px] uppercase tracking-[.25em] text-white/80">
-                  Amenities & Experience
+                
                 </span>
               </div>
 

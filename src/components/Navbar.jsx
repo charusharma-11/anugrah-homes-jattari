@@ -90,8 +90,7 @@ function Navbar() {
             </Link>
 
             {/* DESKTOP NAVIGATION - RIGHT */}
-            <div className="hidden min-w-0 flex-1 items-center justify-end gap-1 md:flex lg:gap-1.5">
-              {links.map((link) => {
+<div className="hidden min-w-0 flex-1 flex-wrap items-center justify-end gap-1 md:flex lg:flex-nowrap lg:gap-1.5">              {links.map((link) => {
                 const Icon = link.icon;
 
                 return (
@@ -176,7 +175,7 @@ function Navbar() {
 
           {/* MOBILE NAVIGATION LINKS */}
           <div className="grid grid-cols-2 gap-2">
-            {links.map((link, index) => {
+            {links.map((link) => {
               const Icon = link.icon;
 
               return (
@@ -204,14 +203,13 @@ function Navbar() {
                         <Icon size={17} strokeWidth={1.7} />
                       </span>
 
-                      <span className="min-w-0">
-                        <span className="block text-[11px] font-medium">
-                          {link.name}
-                        </span>
-                        <span className="mt-1 block text-[9px] text-white/35">
-                          0{index + 1}
-                        </span>
-                      </span>
+                     
+<span className="min-w-0">
+  <span className="block break-words text-[11px] font-medium">
+    {link.name}
+  </span>
+</span>
+
                     </>
                   )}
                 </NavLink>

@@ -1424,3 +1424,72 @@ textarea {
     transition: none !important;
   }
 }
+
+/* RESPONSIVE CONTENT FIX — preserve text and layout */
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+body {
+  margin: 0;
+}
+
+/* Prevent flex/grid children from forcing wider layouts */
+main,
+main > *,
+section,
+article,
+.flex,
+.grid {
+  min-width: 0;
+}
+
+/* Keep images and videos inside their containers */
+img,
+video,
+canvas,
+iframe {
+  max-width: 100%;
+}
+
+/* Wrap long text instead of cutting it */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+label {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
+/* Allow grid and flex content to fit available width */
+.grid > *,
+.flex > * {
+  min-width: 0;
+}
+
+/* Disable horizontal reveal movement on small screens */
+@media (max-width: 768px) {
+  .scroll-reveal-left,
+  .scroll-reveal-right {
+    transform: translateY(24px);
+  }
+
+  .scroll-reveal-visible {
+    transform: none;
+  }
+
+  .animate-from-left.is-revealed,
+  .animate-from-right.is-revealed {
+    animation: fadeIn 0.7s ease both;
+  }
+}

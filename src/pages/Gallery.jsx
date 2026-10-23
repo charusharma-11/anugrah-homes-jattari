@@ -45,7 +45,7 @@ function Gallery() {
           <div className="hero-copy relative z-10">
             <div className="hero-entrance mb-7 flex items-center gap-3 text-[10px] font-medium uppercase tracking-[0.25em] text-[#B9D8C8] sm:text-xs">
               <span className="h-px w-10 bg-[#B9D8C8]" />
-              Anugrah Homes · Jattari
+             
             </div>
 
             <h1 className="hero-title text-5xl font-medium leading-[1.02] tracking-[-0.055em] sm:text-7xl lg:text-[92px]">
